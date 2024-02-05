@@ -1,9 +1,12 @@
 package com.junstagram.demo.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @Entity
 @Getter
@@ -12,28 +15,32 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "user_id")
     private Long id;
 
-    @Column(length = 30 , nullable = false)
+    @Column(length = 30, nullable = false)
     private String name;
 
     @Column(nullable = false)
     private String password;
 
-    @Column(length = 100 , nullable = false , unique = true)
+    @Column(length = 100, nullable = false, unique = true)
     private String email;
 
     private String phone;
 
     private String title;
-
     private String website;
 
     @Column(name = "profile_image_url")
     private String profileImgUrl;
 
+    @OneToMany(mappedBy = "user")
+    @JsonIgnoreProperties({"user"})
+    private List<Post> posts;
+
     @Builder
-    public User(String name , String password , String email , String phone , String title , String website , String profileImgUrl) {
+    public User(String name, String password, String email, String phone, String title, String website, String profileImgUrl) {
         this.name = name;
         this.password = password;
         this.email = email;
