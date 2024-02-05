@@ -7,6 +7,7 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.transaction.annotation.Transactional;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -21,10 +22,13 @@ class UserRepositoryTest {
 
     @Test
     public void save() throws Exception {
+
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+
         //given
         User user = User.builder()
                 .name("userA")
-                .password("1234")
+                .password(encoder.encode("1234"))
                 .email("abc@email.com")
                 .phone("010-1234-5678")
                 .title(null)
@@ -34,8 +38,11 @@ class UserRepositoryTest {
         //when
         userRepository.save(user);
         em.flush();
-        //then
-        Assertions.assertThat(user).isEqualTo(userRepository.findOne(user.getId()));
+        em.clear();
+
+        assertThat(user.getName()).isEqualTo(userRepository.findById(user.getId()).get().getName());
+
+        assertThat(user.getEmail()).isEqualTo(userRepository.findById(user.getId()).get().getEmail());
     }
 
 }
