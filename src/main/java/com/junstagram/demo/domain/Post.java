@@ -44,7 +44,7 @@ public class Post {
     private List<Likes> likes;
 
     @OrderBy("id")
-    @OneToMany(mappedBy = "comment")
+    @OneToMany(mappedBy = "post")
     @JsonIgnoreProperties({"posts"})
     private List<Comment> comments;
 
