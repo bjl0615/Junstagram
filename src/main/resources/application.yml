@@ -1,3 +1,6 @@
+server :
+  port : 8081
+
 spring :
   datasource:
     driver-class-name: org.mariadb.jdbc.Driver
@@ -16,6 +19,14 @@ spring :
       enabled: true
       max-file-size: 5MB
 
+  security:
+    oauth2:
+      client:
+        registration:
+          facebook:
+            client-id: 755707363142736
+            client-secret: ddb957a28a3ea05db67dc331eff612fd
+            scope: public_profile,email
 logging:
   level:
     org.hibernate.SQL: debug
@@ -25,3 +36,5 @@ custom:
     path: '/Users/jun/Study/profile_imgs/'
   post:
     path: '/Users/jun/Study/uploads/'
+
+
