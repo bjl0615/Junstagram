@@ -16,3 +16,9 @@ logging:
   level:
     org.hibernate.SQL: debug
 
+custom:
+  profileImg:
+    path: '/Users/jun/Study/profile_imgs/'
+  post:
+    path: '/Users/jun/Study/uploads/'
+
