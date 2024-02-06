@@ -1,6 +1,7 @@
 package com.junstagram.demo.service;
 
 import com.junstagram.demo.domain.User;
+import com.junstagram.demo.handler.exception.CustomValidationException;
 import com.junstagram.demo.repository.UserRepository;
 import com.junstagram.demo.web.dto.UserSignupDto;
 import lombok.RequiredArgsConstructor;
@@ -15,6 +16,11 @@ public class UserService {
 
     @Transactional
     public User join(UserSignupDto userDto) {
+
+        if(userRepository.findByEmail(userDto.getEmail()) != null) {
+            throw new CustomValidationException("이미 존재하는 메일입니다.");
+        }
+
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
         return userRepository.save(User.builder()
