@@ -11,6 +11,10 @@ spring :
     properties:
       hibernate:
         format_sql: true
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 5MB
 
 logging:
   level:
@@ -21,4 +25,3 @@ custom:
     path: '/Users/jun/Study/profile_imgs/'
   post:
     path: '/Users/jun/Study/uploads/'
-
