@@ -2,9 +2,11 @@ package com.junstagram.demo.service;
 
 import com.junstagram.demo.domain.User;
 import com.junstagram.demo.handler.exception.CustomValidationException;
+import com.junstagram.demo.repository.FollowRepository;
 import com.junstagram.demo.repository.UserRepository;
 import com.junstagram.demo.web.dto.UserSignupDto;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,6 +15,10 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class UserService {
     private final UserRepository userRepository;
+    private final FollowRepository followRepository;
+
+    @Value("${custom.profileImg.path}")
+    private String uploadFolder;
 
     @Transactional
     public User join(UserSignupDto userDto) {
