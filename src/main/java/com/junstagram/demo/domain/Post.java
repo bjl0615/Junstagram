@@ -62,6 +62,18 @@ public class Post {
         this.postImageUrl = postImgUrl;
     }
 
+    public void update(String tag , String text) {
+        this.tag = tag;
+        this.text = text;
+    }
+
+    public void updateLikesCount(Long likesCount) {
+        this.likeCount = likesCount;
+    }
+
+    public void makePost(Long id){
+        this.id = id;
+    }
 
 
 

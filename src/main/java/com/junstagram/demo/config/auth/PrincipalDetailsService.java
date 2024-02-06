@@ -10,17 +10,17 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class PrincipalDetailService implements UserDetailsService {
+public class PrincipalDetailsService implements UserDetailsService {
 
     private final UserRepository userRepository;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userRepository.findByUserEmail(username);
+        User user = userRepository.findUserByEmail(username);
 
-        if(user == null) {
+        if (user == null) {
             return null;
-        }else {
+        } else {
             return new PrincipalDetails(user);
         }
     }

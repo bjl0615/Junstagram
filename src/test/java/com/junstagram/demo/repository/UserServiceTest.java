@@ -2,7 +2,7 @@ package com.junstagram.demo.repository;
 
 import com.junstagram.demo.domain.User;
 import com.junstagram.demo.service.UserService;
-import com.junstagram.demo.web.dto.UserSignupDto;
+import com.junstagram.demo.web.dto.user.UserSignupDto;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

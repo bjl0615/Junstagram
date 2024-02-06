@@ -1,5 +1,6 @@
-package com.junstagram.demo.config.auth;
+package com.junstagram.demo.config.oauth;
 
+import com.junstagram.demo.config.auth.PrincipalDetails;
 import com.junstagram.demo.domain.User;
 import com.junstagram.demo.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -27,7 +28,7 @@ public class Oauth2DetailService extends DefaultOAuth2UserService {
         String name = (String) userMap.get("name");
         String password = new BCryptPasswordEncoder().encode(UUID.randomUUID().toString());
 
-        User checkUser = userRepository.findByUserEmail(email);
+        User checkUser = userRepository.findUserByEmail(email);
 
         if(checkUser == null) {
             User user = User.builder()

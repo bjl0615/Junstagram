@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 
 public interface LikesRepository extends JpaRepository<Likes , Long> {
 
-    void deleteLikesBtPost(Post post);
+    void deleteLikesByPost(Post post);
 
     @Modifying
     @Query(value = "insert into likes(post_id,user_id) values (:postId , :userId" , nativeQuery = true)

@@ -1,7 +1,7 @@
 package com.junstagram.demo.web.controller;
 
 import com.junstagram.demo.service.UserService;
-import com.junstagram.demo.web.dto.UserSignupDto;
+import com.junstagram.demo.web.dto.user.UserSignupDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;

@@ -1,6 +1,7 @@
 package com.junstagram.demo.config.auth;
 
 import com.junstagram.demo.domain.User;
+import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.oauth2.core.user.OAuth2User;
@@ -8,16 +9,17 @@ import org.springframework.security.oauth2.core.user.OAuth2User;
 import java.util.Collection;
 import java.util.Map;
 
+@Data
 public class PrincipalDetails implements UserDetails , OAuth2User {
 
     private User user;
-    private Map<String , Object> attributes;
+    private Map<String, Object> attributes;
 
     public PrincipalDetails(User user) {
         this.user = user;
     }
 
-    public PrincipalDetails(User user , Map<String , Object> attributes) {
+    public PrincipalDetails(User user, Map<String, Object> attributes) {
         this.user = user;
         this.attributes = attributes;
     }
@@ -26,9 +28,8 @@ public class PrincipalDetails implements UserDetails , OAuth2User {
         this.user = user;
     }
 
-
     @Override
-    public Map<String, Object> getAttributes() {
+    public Map<String,Object> getAttributes() {
         return attributes;
     }
 
@@ -66,6 +67,7 @@ public class PrincipalDetails implements UserDetails , OAuth2User {
     public boolean isEnabled() {
         return true;
     }
+
 
     @Override
     public String getName() {

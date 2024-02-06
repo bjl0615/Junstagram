@@ -1,7 +1,7 @@
 package com.junstagram.demo.config;
 
-import com.junstagram.demo.config.auth.Oauth2DetailService;
-import com.junstagram.demo.config.auth.PrincipalDetailService;
+import com.junstagram.demo.config.auth.PrincipalDetailsService;
+import com.junstagram.demo.config.oauth.Oauth2DetailService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
@@ -10,7 +10,6 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
@@ -20,7 +19,7 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 public class SecurityConfig {
 
-    private final PrincipalDetailService principalDetailService;
+    private final PrincipalDetailsService principalDetailService;
     private final Oauth2DetailService oauth2DetailService;
     @Bean
     public PasswordEncoder passwordEncoder() {

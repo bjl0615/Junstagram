@@ -6,6 +6,7 @@ package com.junstagram.demo.repository;
 import com.junstagram.demo.domain.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+
 public interface UserRepository extends JpaRepository<User, Long> {
-    User findByUserEmail(String email);
+    User findUserByEmail(String email);
 }
