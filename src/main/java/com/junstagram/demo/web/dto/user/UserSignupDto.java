@@ -1,4 +1,4 @@
-package com.junstagram.demo.web.dto;
+package com.junstagram.demo.web.dto.user;
 
 import lombok.Builder;
 import lombok.Data;
