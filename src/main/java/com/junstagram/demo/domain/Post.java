@@ -33,7 +33,7 @@ public class Post {
     private Long likeCount;
 
     @Transient
-    private boolean likeState;
+    private boolean likesState;
 
     private LocalDateTime createDate;
 
@@ -60,6 +60,10 @@ public class Post {
         this.text = text;
         this.likeCount = likeCount;
         this.postImageUrl = postImgUrl;
+    }
+
+    public void updateLikesState(boolean likesState) {
+        this.likesState = likesState;
     }
 
     public void update(String tag , String text) {

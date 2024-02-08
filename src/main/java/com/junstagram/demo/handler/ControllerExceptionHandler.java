@@ -14,12 +14,12 @@ import org.springframework.web.bind.annotation.RestController;
 @ControllerAdvice
 public class ControllerExceptionHandler {
 
-    @ExceptionHandler(CustomValidationApiException.class)
-    public String validationException(CustomValidationException e) {
+    @ExceptionHandler(CustomValidationException.class)
+    public ResponseEntity<String> validationException(CustomValidationException e) {
         if (e.getErrorMap() == null) {
-            return Script.back(e.getMessage());
+            return new ResponseEntity<>(Script.back(e.getMessage()), HttpStatus.BAD_REQUEST);
         } else {
-            return Script.back(e.getErrorMap().toString());
+            return new ResponseEntity<>(Script.back(e.getErrorMap().toString()), HttpStatus.BAD_REQUEST);
         }
     }
 
@@ -28,7 +28,7 @@ public class ControllerExceptionHandler {
         return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
     }
 
-    @ExceptionHandler()
+    @ExceptionHandler(CustomApiException.class)
     public ResponseEntity<?> apiException(CustomApiException e) {
         return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
     }
