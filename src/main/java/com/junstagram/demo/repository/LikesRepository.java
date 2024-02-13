@@ -6,15 +6,15 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
-public interface LikesRepository extends JpaRepository<Likes , Long> {
+public interface LikesRepository extends JpaRepository<Likes, Long> {
 
     void deleteLikesByPost(Post post);
 
     @Modifying
-    @Query(value = "insert into likes(post_id,user_id) values (:postId , :userId" , nativeQuery = true)
-    void likes(Long postId , Long userId);
+    @Query(value = "insert into Likes(post_id, user_id) values(:postId, :userId)", nativeQuery = true)
+    void likes(Long postId, Long userId);
 
     @Modifying
-    @Query(value = "delete from likes where post_id = :postId and user_Id = :user_id" , nativeQuery = true)
-    void unLikes(Long postId , Long userId);
+    @Query(value = "delete from Likes l where l.post.id = :postId and l.user.id = :user_id")
+    void unLikes(Long postId, Long userId);
 }
