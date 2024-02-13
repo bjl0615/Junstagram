@@ -18,5 +18,4 @@ public class UserProfileDto {
     private int postCount;
     private int userFollowerCount;
     private int userFollowingCount;
-
 }

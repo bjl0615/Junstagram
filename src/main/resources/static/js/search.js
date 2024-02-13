@@ -8,7 +8,6 @@ function storyLoad() {
     }).done(res => {
         if(res.totalElements == 0) {
             alert("검색 결과가 없습니다.");
-            window.history.back();
         }
         res.content.forEach((post) => {
             let postItem = getStoryItem(post);

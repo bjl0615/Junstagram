@@ -24,6 +24,7 @@ import java.nio.file.Paths;
 @RequiredArgsConstructor
 @Service
 public class UserService {
+
     private final UserRepository userRepository;
     private final FollowRepository followRepository;
 
@@ -58,16 +59,16 @@ public class UserService {
                 });
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
-        if(!multipartFile.isEmpty()) {
-            String imageFileName = user.getId()+"_"+multipartFile.getOriginalFilename();
-            Path imgFilehPath = Paths.get(uploadFolder + imageFileName);
-            try{
-                if(user.getProfileImgUrl() != null) {
+        if (!multipartFile.isEmpty()) {
+            String imageFileName = user.getId() + "_" + multipartFile.getOriginalFilename();
+            Path imageFilePath = Paths.get(uploadFolder + imageFileName);
+            try {
+                if (user.getProfileImgUrl() != null) {
                     File file = new File(uploadFolder + user.getProfileImgUrl());
                     file.delete();
                 }
-                Files.write(imgFilehPath, multipartFile.getBytes());
-            }catch (Exception e) {
+                Files.write(imageFilePath, multipartFile.getBytes());
+            } catch (Exception e) {
                 e.printStackTrace();
             }
             user.updateProfileImgUrl(imageFileName);
@@ -85,7 +86,7 @@ public class UserService {
     }
 
     @Transactional
-    public UserProfileDto getUserProfileDto(Long profileId , Long sessionId) {
+    public UserProfileDto getUserProfileDto(Long profileId, Long sessionId) {
         UserProfileDto userProfileDto = new UserProfileDto();
 
         User findUser = userRepository.findById(profileId).orElseThrow(() -> {
@@ -101,6 +102,7 @@ public class UserService {
 
         userProfileDto.setFollow(followRepository.findFollowByFromUserIdAndToUserId(loginUser.getId(), findUser.getId()) != null);
 
+        userProfileDto.setUserFollowerCount(followRepository.findFollowerCountById(profileId));
         userProfileDto.setUserFollowingCount(followRepository.findFollowingCountById(profileId));
 
         findUser.getPosts().forEach(post -> {
@@ -109,7 +111,4 @@ public class UserService {
 
         return userProfileDto;
     }
-
-
-
 }

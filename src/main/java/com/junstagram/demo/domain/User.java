@@ -50,7 +50,7 @@ public class User {
         this.profileImgUrl = profileImgUrl;
     }
 
-    public void update(String name , String password , String phone , String title , String website) {
+    public void update(String name, String password, String phone, String title, String website) {
         this.name = name;
         this.password = password;
         this.phone = phone;

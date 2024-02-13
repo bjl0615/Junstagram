@@ -35,6 +35,9 @@ class UserRepositoryTest {
                 .website(null)
                 .profileImgUrl(null)
                 .build();
+
+        System.out.println(user.getName());
+
         //when
         userRepository.save(user);
         em.flush();

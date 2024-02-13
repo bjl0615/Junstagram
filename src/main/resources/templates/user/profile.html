@@ -54,14 +54,7 @@
             <div id="tab-1-content" class="tab-content-item show">
                 <!--게시물컨 그리드배열-->
                 <div class="tab-1-content-inner" id="img-box" >
-                    <!--아이템들-->
-                    <div class="img-box" th:each="post : ${userProfileDto.user.postList}" th:onclick="|postPopup(${post.id}, '.modal-post')|">
-                        <img th:src="@{${'/upload/' + post.postImgUrl}}" />
-                        <div class="comment">
-                            <a> <i class="fas fa-heart"></i><span th:text="${post.likesCount}"></span></a>
-                        </div>
-                    </div>
-                    <!--아이템들end-->
+
                 </div>
             </div>
         </div>

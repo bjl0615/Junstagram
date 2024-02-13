@@ -1,7 +1,7 @@
 package com.junstagram.demo.web.controller.api;
 
 import com.junstagram.demo.config.auth.PrincipalDetails;
-import com.junstagram.demo.service.LikeService;
+import com.junstagram.demo.service.LikesService;
 import com.junstagram.demo.service.PostService;
 import lombok.RequiredArgsConstructor;
 import org.apache.coyote.Response;
@@ -19,7 +19,7 @@ import static org.springframework.http.HttpStatus.OK;
 public class PostApiController {
 
     private final PostService postService;
-    private final LikeService likeService;
+    private final LikesService likeService;
 
     @GetMapping("/{postId}")
     public ResponseEntity<?> postInfo(@PathVariable Long postId , @AuthenticationPrincipal PrincipalDetails principalDetails) {
@@ -34,7 +34,7 @@ public class PostApiController {
 
     @DeleteMapping("/{postId}/likes")
     public ResponseEntity<?> unlikes(@PathVariable Long postId , @AuthenticationPrincipal PrincipalDetails principalDetails) {
-        likeService.unlikes(postId , principalDetails.getUser().getId());
+        likeService.unLikes(postId , principalDetails.getUser().getId());
         return new ResponseEntity<>("좋아요 취소 성공" , OK);
     }
 
