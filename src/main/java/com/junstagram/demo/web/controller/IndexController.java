@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 @RequiredArgsConstructor
 public class IndexController {
 
-    @GetMapping({"/" , "post/story"})
-    public String story(){
+    @GetMapping({"/", "post/story"})
+    public String story() {
         return "post/story";
     }
 
@@ -17,7 +17,6 @@ public class IndexController {
     public String login() {
         return "login";
     }
-
     @GetMapping("/signup")
     public String signup() {
         return "signup";

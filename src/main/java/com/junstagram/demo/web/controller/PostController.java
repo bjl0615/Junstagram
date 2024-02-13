@@ -28,45 +28,53 @@ public class PostController {
 
     @PostMapping
     public String uploadPost(PostUploadDto postUploadDto,
-                             @RequestParam("uploadImgUrl")MultipartFile multipartFile ,
-                             RedirectAttributes redirectAttributes ,
-                             @AuthenticationPrincipal PrincipalDetails principalDetails)  {
-        if(multipartFile.isEmpty()) {
+                             @RequestParam("uploadImgUrl") MultipartFile multipartFile,
+                             RedirectAttributes redirectAttributes,
+                             @AuthenticationPrincipal PrincipalDetails principalDetails) {
+        if (multipartFile.isEmpty()) {
             throw new CustomValidationException("이미지가 첨부되지 않았습니다.");
         }
 
-        postService.upload(postUploadDto, multipartFile , principalDetails);
-        redirectAttributes.addAttribute("id" , principalDetails.getUser().getId());
+        postService.upload(postUploadDto, multipartFile, principalDetails);
+        redirectAttributes.addAttribute("id", principalDetails.getUser().getId());
         return "redirect:/user/profile";
     }
 
     @GetMapping("/update/{postId}")
-    public String update(@PathVariable Long postId , Model model){
+    public String update(@PathVariable Long postId, Model model) {
         PostDto postDto = postService.getPostDto(postId);
-        model.addAttribute("postDto" , postDto);
+        model.addAttribute("postDto", postDto);
         return "post/update";
     }
 
     @PostMapping("/update")
-    public String postUpdate(PostUpdateDto postUpdateDto , @AuthenticationPrincipal PrincipalDetails principalDetails, RedirectAttributes redirectAttributes) {
+    public String postUpdate(PostUpdateDto postUpdateDto,
+                             @AuthenticationPrincipal PrincipalDetails principalDetails,
+                             RedirectAttributes redirectAttributes) {
         postService.update(postUpdateDto);
-        redirectAttributes.addAttribute("id" , principalDetails.getUser().getId());
+        redirectAttributes.addAttribute("id", principalDetails.getUser().getId());
         return "redirect:/user/profile";
     }
 
     @PostMapping("/delete")
-    public String delete(@RequestParam Long postId ,
+    public String delete(@RequestParam Long postId,
                          @AuthenticationPrincipal PrincipalDetails principalDetails,
                          RedirectAttributes redirectAttributes) {
         postService.delete(postId);
-        redirectAttributes.addAttribute("id" , principalDetails.getUser().getId());
+        redirectAttributes.addAttribute("id", principalDetails.getUser().getId());
         return "redirect:/user/profile";
     }
 
     @GetMapping("/search")
-    public String search(@RequestParam String tag , Model model) {
-        model.addAttribute("tag" , tag);
+    public String search(@RequestParam String tag, Model model) {
+        model.addAttribute("tag", tag);
         return "post/search";
+    }
+
+    @PostMapping("/searchForm")
+    public String searchForm(String tag, RedirectAttributes redirectAttributes) {
+        redirectAttributes.addAttribute("tag", tag);
+        return "redirect:/post/search";
     }
 
     @GetMapping("/likes")
@@ -78,5 +86,4 @@ public class PostController {
     public String popular() {
         return "post/popular";
     }
-
 }

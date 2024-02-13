@@ -26,9 +26,8 @@ public class AccountController {
     }
 
     @GetMapping("/logout")
-    public String logoutPage(HttpServletRequest request , HttpServletResponse response) {
-        new SecurityContextLogoutHandler().logout(request , response , SecurityContextHolder.getContext().getAuthentication());
+    public String logoutPage(HttpServletRequest request, HttpServletResponse response) {
+        new SecurityContextLogoutHandler().logout(request, response, SecurityContextHolder.getContext().getAuthentication());
         return "redirect:/login";
     }
-
 }
